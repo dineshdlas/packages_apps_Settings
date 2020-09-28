@@ -18,22 +18,21 @@ package com.android.settings.deviceinfo.hardwareinfo;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.Sliceable;
 
-public class HardwareRevisionPreferenceController extends BasePreferenceController {
+public class PlatformRevisionPreferenceController extends BasePreferenceController {
 
-    public HardwareRevisionPreferenceController(Context context, String preferenceKey) {
+    public PlatformRevisionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_device_model) &&
-                !TextUtils.isEmpty(getSummary()) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mContext.getResources().getBoolean(R.bool.config_show_device_model)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -42,13 +41,23 @@ public class HardwareRevisionPreferenceController extends BasePreferenceControll
     }
 
     @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isCopyableSlice() {
+        return true;
+    }
+
+    @Override
     public void copy() {
         Sliceable.setCopyContent(mContext, getSummary(),
-                mContext.getText(R.string.hardware_revision));
+                mContext.getText(R.string.platform_revision));
     }
 
     @Override
     public CharSequence getSummary() {
-        return SystemProperties.get("ro.boot.hardware.revision");
+        return SystemProperties.get("ro.board.platform");
     }
 }

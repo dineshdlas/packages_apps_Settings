@@ -21,12 +21,14 @@
     android:key="my_device_info_pref_screen"
     android:title="@string/about_settings">
 
+    <!--
     <com.android.settingslib.widget.LayoutPreference
         android:key="my_device_info_header"
         android:order="0"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
         settings:isPreferenceVisible="false"/>
+    -->
 
     <!-- Device name -->
     <com.android.settings.widget.ValidatedEditTextPreference
@@ -45,7 +47,7 @@
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
-    <!-- Phone number -->
+    <!-- Phone number
     <Preference
         android:key="phone_number"
         android:order="3"
@@ -53,7 +55,7 @@
         android:summary="@string/summary_placeholder"
         android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
-        settings:enableCopying="true"/>
+        settings:enableCopying="true"/> -->
 
     <Preference
         android:key="emergency_info"
